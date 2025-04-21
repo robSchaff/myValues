@@ -1,25 +1,90 @@
-// /app/routes/round.tsx
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { values as importedValues } from "../lib/values";
+
+function shuffle<T>(array: T[]): T[] {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
 export default function Round() {
-    const values = ["Transparency", "Security", "Wisdom", "Compassion"];
-    const [index, setIndex] = useState(0);
-    const [topValues, setTopValues] = useState<string[]>([]);
-  
-    const handleSelect = (winner: string) => {
-      setTopValues(prev => [...prev, winner]);
-      setIndex(index + 2);
-    };
-  
-    if (index >= values.length) {
-      return <Navigate to="/results" state={{ topValues }} />;
+  const navigate = useNavigate();
+  const [round, setRound] = useState(1);
+  const [pairIndex, setPairIndex] = useState(0);
+  const [currentValues, setCurrentValues] = useState(() => shuffle(importedValues));
+  const [nextRoundValues, setNextRoundValues] = useState<string[]>([]);
+  const [finalists, setFinalists] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (round === 5 && finalists.length === 3) {
+      navigate("/results", { state: { topValues: finalists } });
     }
-  
+  }, [round, finalists, navigate]);
+
+  const handleSelect = (winner: string) => {
+    const updatedNextRound = [...nextRoundValues, winner];
+
+    if (pairIndex + 2 >= currentValues.length) {
+      if (round === 4) {
+        setFinalists([winner]);
+        setRound(5);
+        return;
+      }
+
+      setCurrentValues(updatedNextRound);
+      setNextRoundValues([]);
+      setPairIndex(0);
+      setRound(round + 1);
+    } else {
+      setNextRoundValues(updatedNextRound);
+      setPairIndex(pairIndex + 2);
+    }
+  };
+
+  if (round === 5) {
+    const finalFour = [...nextRoundValues, currentValues[pairIndex], currentValues[pairIndex + 1]];
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
-        <h2 className="text-xl mb-4">Which value matters more to you?</h2>
-        <div className="flex space-x-4">
-          <button className="bg-green-500 text-white px-4 py-2 rounded" onClick={() => handleSelect(values[index])}>{values[index]}</button>
-          <button className="bg-purple-500 text-white px-4 py-2 rounded" onClick={() => handleSelect(values[index + 1])}>{values[index + 1]}</button>
+      <div>
+        <h2>Choose 2 more values for your Top 3</h2>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+          {finalFour.map((value) => (
+            <button
+              key={value}
+              onClick={() => {
+                if (!finalists.includes(value)) {
+                  const updated = [...finalists, value];
+                  setFinalists(updated);
+                  if (updated.length === 3) {
+                    navigate("/results", { state: { topValues: updated } });
+                  }
+                }
+              }}
+            >
+              {value}
+            </button>
+          ))}
         </div>
       </div>
     );
   }
+
+  if (pairIndex >= currentValues.length) return null;
+
+  return (
+    <div>
+      <h2>Round {round}: Which value matters more to you?</h2>
+      <div style={{ display: "flex", gap: "2rem" }}>
+        <button onClick={() => handleSelect(currentValues[pairIndex])}>
+          {currentValues[pairIndex]}
+        </button>
+        <button onClick={() => handleSelect(currentValues[pairIndex + 1])}>
+          {currentValues[pairIndex + 1]}
+        </button>
+      </div>
+    </div>
+  );
+}
