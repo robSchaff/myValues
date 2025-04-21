@@ -19,22 +19,19 @@ export default function Round() {
   const [nextRoundValues, setNextRoundValues] = useState<string[]>([]);
   const [finalists, setFinalists] = useState<string[]>([]);
 
-  useEffect(() => {
-    if (round === 5 && finalists.length === 3) {
-      navigate("/results", { state: { topValues: finalists } });
-    }
-  }, [round, finalists, navigate]);
-
   const handleSelect = (winner: string) => {
     const updatedNextRound = [...nextRoundValues, winner];
-
+  
     if (pairIndex + 2 >= currentValues.length) {
-      if (round === 4) {
-        setFinalists([winner]);
-        setRound(5);
+      // End of current round
+      if (currentValues.length === 4) {
+        // We are down to the final 4 → navigate to results
+        const finalFour = [...updatedNextRound];
+        navigate("/results", { state: { topValues: finalFour } });
         return;
       }
-
+  
+      // Prepare next round
       setCurrentValues(updatedNextRound);
       setNextRoundValues([]);
       setPairIndex(0);
@@ -44,33 +41,6 @@ export default function Round() {
       setPairIndex(pairIndex + 2);
     }
   };
-
-  if (round === 5) {
-    const finalFour = [...nextRoundValues, currentValues[pairIndex], currentValues[pairIndex + 1]];
-    return (
-      <div>
-        <h2>Choose 2 more values for your Top 3</h2>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-          {finalFour.map((value) => (
-            <button
-              key={value}
-              onClick={() => {
-                if (!finalists.includes(value)) {
-                  const updated = [...finalists, value];
-                  setFinalists(updated);
-                  if (updated.length === 3) {
-                    navigate("/results", { state: { topValues: updated } });
-                  }
-                }
-              }}
-            >
-              {value}
-            </button>
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   if (pairIndex >= currentValues.length) return null;
 
