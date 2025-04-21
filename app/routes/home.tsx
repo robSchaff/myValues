@@ -10,11 +10,15 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
   const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-3xl font-bold mb-4">Tournament of Values</h1>
-      <p className="mb-6 text-center max-w-md">Choose your core values through a series of one-on-one matchups.</p>
-      <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={() => navigate('/round')}>Start</button>
+    <div className="home-container">
+      <h1 className="home-title">Tournament of Values</h1>
+      <p className="home-subtext">
+        Choose your core values through a series of one-on-one matchups. Each
+        round helps you narrow down what truly matters most.
+      </p>
+      <button onClick={() => navigate("/round")}>Start</button>
     </div>
   );
 }

@@ -75,9 +75,9 @@ export default function Round() {
   if (pairIndex >= currentValues.length) return null;
 
   return (
-    <div>
+    <div className="round-container">
       <h2>Round {round}: Which value matters more to you?</h2>
-      <div style={{ display: "flex", gap: "2rem" }}>
+      <div className="button-pair">
         <button onClick={() => handleSelect(currentValues[pairIndex])}>
           {currentValues[pairIndex]}
         </button>
