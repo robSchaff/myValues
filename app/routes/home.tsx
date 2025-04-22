@@ -13,20 +13,33 @@ export default function Home() {
         and refine what truly matters to you.
       </p>
 
-      <button
-        onClick={() => navigate("/round")}
-        className="px-6 py-3 text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition mb-4"
+      <a
+        href="/round"
+        className="block px-6 py-3 text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition mb-4 text-center"
       >
         Classic Bracket
-      </button>
+      </a>
 
-      <button
-        onClick={() => navigate("/round-swiss")}
-        className="px-6 py-3 text-white bg-purple-600 rounded-lg shadow hover:bg-purple-700 transition"
+      <a
+        href="/round-swiss"
+        className="block px-6 py-3 text-white bg-purple-600 rounded-lg shadow hover:bg-purple-700 transition text-center"
       >
         Swiss Style
-      </button>
+      </a>
     </div>
   );
 }
 
+//      <button
+//        onClick={() => navigate("/round")}
+//        className="px-6 py-3 text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition mb-4"
+//      >
+//</div>        Classic Bracket
+//      </button>
+//
+//     <button
+//        onClick={() => navigate("/round-swiss")}
+//        className="px-6 py-3 text-white bg-purple-600 rounded-lg shadow hover:bg-purple-700 transition"
+//      >
+//        Swiss Style
+//      </button>
