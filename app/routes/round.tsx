@@ -45,13 +45,22 @@ export default function Round() {
   if (pairIndex >= currentValues.length) return null;
 
   return (
-    <div className="round-container">
-      <h2>Round {round}: Which value matters more to you?</h2>
-      <div className="button-pair">
-        <button onClick={() => handleSelect(currentValues[pairIndex])}>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+      <h2 className="text-2xl font-semibold text-blue-700 mb-6">
+        Round {round}: Which value matters more to you?
+      </h2>
+  
+      <div className="flex flex-col sm:flex-row gap-6">
+        <button
+          className="w-60 px-6 py-4 bg-blue-600 text-white text-lg rounded-lg shadow hover:bg-blue-700 transition"
+          onClick={() => handleSelect(currentValues[pairIndex])}
+        >
           {currentValues[pairIndex]}
         </button>
-        <button onClick={() => handleSelect(currentValues[pairIndex + 1])}>
+        <button
+          className="w-60 px-6 py-4 bg-blue-600 text-white text-lg rounded-lg shadow hover:bg-blue-700 transition"
+          onClick={() => handleSelect(currentValues[pairIndex + 1])}
+        >
           {currentValues[pairIndex + 1]}
         </button>
       </div>
