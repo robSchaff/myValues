@@ -13,7 +13,11 @@ export default function Home() {
 
   return (
     <div className="home-container">
-      <h1 className="home-title">Tournament of Values</h1>
+
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+        <h1 className="text-4xl font-bold text-blue-700">Tournament of Values</h1>
+      </div>
+
       <p className="home-subtext">
         Choose your core values through a series of one-on-one matchups. Each
         round helps you narrow down what truly matters most.
