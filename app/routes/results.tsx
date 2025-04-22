@@ -8,7 +8,10 @@ export default function Results() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
-      <h1 className="text-3xl font-bold text-blue-700 mb-6">Your Top Values</h1>
+
+      <h1 className="text-3xl font-bold text-blue-700 mb-6">
+        ✨ Your Top Values ✨
+      </h1>
 
       <ul className="text-lg text-gray-800 mb-8 space-y-2">
         {topValues.map((value, index) => (

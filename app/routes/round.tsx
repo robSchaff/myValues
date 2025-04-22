@@ -46,9 +46,12 @@ export default function Round() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
-      <h2 className="text-2xl font-semibold text-blue-700 mb-6">
-        Round {round}: Which value matters more to you?
-      </h2>
+      <div className="text-center mb-6">
+        <h2 className="text-xl text-gray-500 mb-1">Round {round}</h2>
+        <h3 className="text-2xl font-semibold text-blue-700">
+          Which value matters more to you?
+        </h3>
+      </div>
 
       <div
         key={pairIndex} // 👈 ensures re-render when pair changes
