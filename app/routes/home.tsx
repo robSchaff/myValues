@@ -15,7 +15,7 @@ export default function Home() {
 
       <button
         onClick={() => navigate("/round")}
-        className="px-6 py-3 text-white bg-purple-600 rounded-lg shadow hover:bg-purple-700 transition"
+        className="px-6 py-3 text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition"
       >
         Start
       </button>

@@ -75,7 +75,7 @@ export default function RoundSwiss() {
       <h2 className="text-xl text-gray-500 mb-1">
         Match {currentMatchIndex + 1} of {matches.length}
       </h2>
-      <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+      <h3 className="text-2xl font-semibold text-blue-700 mb-4 text-center">
         Which value feels more true to you?
       </h3>
 
