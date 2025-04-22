@@ -49,16 +49,19 @@ export default function Round() {
       <h2 className="text-2xl font-semibold text-blue-700 mb-6">
         Round {round}: Which value matters more to you?
       </h2>
-  
-      <div className="flex flex-col sm:flex-row gap-6">
+
+      <div
+        key={pairIndex} // 👈 ensures re-render when pair changes
+        className="flex flex-col sm:flex-row sm:space-x-6 space-y-4 sm:space-y-0 mt-4"
+      >
         <button
-          className="w-60 px-6 py-4 bg-blue-600 text-white text-lg rounded-lg shadow hover:bg-blue-700 transition"
+          className="w-60 px-6 py-4 bg-blue-600 text-white text-lg rounded-lg shadow hover:bg-blue-700 hover:scale-105 transform transition duration-150 ease-in-out"
           onClick={() => handleSelect(currentValues[pairIndex])}
         >
           {currentValues[pairIndex]}
         </button>
         <button
-          className="w-60 px-6 py-4 bg-blue-600 text-white text-lg rounded-lg shadow hover:bg-blue-700 transition"
+          className="w-60 px-6 py-4 bg-blue-600 text-white text-lg rounded-lg shadow hover:bg-blue-700 hover:scale-105 transform transition duration-150 ease-in-out"
           onClick={() => handleSelect(currentValues[pairIndex + 1])}
         >
           {currentValues[pairIndex + 1]}
