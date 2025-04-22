@@ -13,19 +13,12 @@ export default function Home() {
         and refine what truly matters to you.
       </p>
 
-      <a
-        href="/round"
-        className="block px-6 py-3 text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition mb-4 text-center"
+      <button
+        onClick={() => navigate("/round-swiss")}
+        className="px-6 py-3 text-white bg-purple-600 rounded-lg shadow hover:bg-purple-700 transition"
       >
-        Classic Bracket
-      </a>
-
-      <a
-        href="/round-swiss"
-        className="block px-6 py-3 text-white bg-purple-600 rounded-lg shadow hover:bg-purple-700 transition text-center"
-      >
-        Swiss Style
-      </a>
+        Start
+      </button>
     </div>
   );
 }
@@ -43,3 +36,14 @@ export default function Home() {
 //      >
 //        Swiss Style
 //      </button>
+/*
+<a
+        href="/round-swiss"
+        className="block px-6 py-3 text-white bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition mb-4 text-center"
+      >
+        Start
+      </a>
+    </div>
+
+
+*/
