@@ -1,12 +1,15 @@
 // /app/routes/results.tsx
 import { useLocation, useNavigate } from "react-router";
+import { analyzeCategories } from "../utils/analyzeCategories";
 import { appVersion } from "../lib/meta";
+
 
 
 export default function Results() {
   const location = useLocation();
   const navigate = useNavigate();
   const topValues = location.state?.topValues || [];
+  const { dominantCategories, categoryCounts } = analyzeCategories(topValues);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
@@ -22,6 +25,13 @@ export default function Results() {
           </li>
         ))}
       </ul>
+
+      {dominantCategories.length > 0 && (
+        <p className="text-sm text-gray-500 mt-6 mb-10">
+        Your top values reflect a strong emphasis on{" "}
+        <strong>{dominantCategories.join(" and ")}</strong>.
+        </p>
+      )}
 
       <button
         onClick={() => navigate("/")}
