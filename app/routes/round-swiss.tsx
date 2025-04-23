@@ -25,19 +25,26 @@ export default function RoundSwiss() {
   // Generate matches on mount
   useEffect(() => {
     const generateMatches = (values: string[], appearances = 3): Match[] => {
-      const matchList: Match[] = [];
-      const count: Record<string, number> = Object.fromEntries(values.map(v => [v, 0]));
-
-      while (Object.values(count).some(c => c < appearances)) {
-        const available = values.filter(v => count[v] < appearances);
-        const [a, b] = shuffle(available).slice(0, 2);
-        matchList.push({ a, b });
-        count[a]++;
-        count[b]++;
-      }
-
-      return shuffle(matchList);
-    };
+        const matchList: Match[] = [];
+        const count: Record<string, number> = Object.fromEntries(values.map(v => [v, 0]));
+        const totalNeededMatches = (values.length * appearances) / 2;
+      
+        while (matchList.length < totalNeededMatches) {
+          const available = values.filter(v => count[v] < appearances);
+          const [a, b] = shuffle(available).slice(0, 2);
+      
+          // Prevent pairing same value or exceeding appearance count
+          if (!a || !b || a === b || count[a] >= appearances || count[b] >= appearances) {
+            continue;
+          }
+      
+          matchList.push({ a, b });
+          count[a]++;
+          count[b]++;
+        }
+      
+        return shuffle(matchList);
+      };
 
     setMatches(generateMatches(shuffle(importedValues), 3));
     }, []);
