@@ -1,5 +1,7 @@
 // /app/routes/results.tsx
 import { useLocation, useNavigate } from "react-router";
+import { appVersion } from "../lib/meta";
+
 
 export default function Results() {
   const location = useLocation();
@@ -27,6 +29,8 @@ export default function Results() {
       >
         Start Over
       </button>
+
+      <p className="text-sm text-gray-400 mt-6">Version {appVersion} · Swiss-style scoring</p>
     </div>
   );
 }
