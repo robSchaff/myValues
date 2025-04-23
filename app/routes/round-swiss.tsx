@@ -39,8 +39,8 @@ export default function RoundSwiss() {
       return shuffle(matchList);
     };
 
-    setMatches(generateMatches(shuffle(importedValues)));
-  }, []);
+    setMatches(generateMatches(shuffle(importedValues), 3));
+    }, []);
 
   const handleSelect = (winner: string) => {
     setScores(prev => ({
